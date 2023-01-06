@@ -1,0 +1,10 @@
+###Script to prune .vcf file (remove variants that are in linkage) and run a PCA to analyze DGRP population structure
+
+# perform linkage pruning - i.e. identify prune sites
+plink --bfile dgrp2 --double-id --allow-extra-chr --chr-set 6 \
+--indep-pairwise 50 10 0.5 --out dgrp2pruned
+
+# prune and create pca
+plink --bfile dgrp2 --double-id --allow-extra-chr --chr-set 6 \
+--extract dgrp2pruned.prune.in \
+--pca --out dgrp_pca
